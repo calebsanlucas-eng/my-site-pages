@@ -1,6 +1,5 @@
 name: Deploy to GitHub Pages
 
-# Se ejecuta cuando haces push a la rama main
 on:
   push:
     branches:
@@ -11,25 +10,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    # 1. Hacer checkout del repositorio
     - name: Checkout repository
       uses: actions/checkout@v3
 
-    # 2. Configurar Node.js (opcional, solo si usas npm o build de JS)
     - name: Setup Node.js
       uses: actions/setup-node@v3
       with:
         node-version: '18'
 
-    # 3. Paso opcional de build (si tu sitio necesita compilación)
     - name: Build site
-      run: |
-        echo "No hay build, solo copiando archivos HTML/CSS"
+      run: echo "No hay build, solo copiando archivos HTML/CSS"
 
-    # 4. Desplegar a GitHub Pages usando un token manual
     - name: Deploy to GitHub Pages
-      uses: peaceiris/actions-gh-pages@v6
+      uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.MY_TOKEN }}
-        publish_dir: ./  # Carpeta donde está tu sitio (index.html y style.css)
-        # branch: gh-pages  # opcional, default es gh-pages
+        publish_dir: ./
